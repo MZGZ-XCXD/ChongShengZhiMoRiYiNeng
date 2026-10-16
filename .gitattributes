@@ -1,0 +1,10 @@
+# 统一成 LF 存、LF 出：Windows 上默认的 autocrlf=true 会把换行改来改去，
+# 换一台电脑克隆下来就会出现「整个文件都变了」的假 diff。
+* text=auto eol=lf
+
+# 二进制文件不要做任何换行换算
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary

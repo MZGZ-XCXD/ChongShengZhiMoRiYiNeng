@@ -1,0 +1,13 @@
+# 草稿目录：临时页面、自检报告、出图的源图、gemini.key 都在这里
+work/
+
+# 换机器打包出来的压缩包
+*.zip
+
+# 无头浏览器临时 profile
+.chrome-profile/
+
+# 系统垃圾
+Thumbs.db
+desktop.ini
+.DS_Store

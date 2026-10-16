@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark-theme">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>末日回声 · Echoes of Doom</title>
+<meta name="description" content="末日回声（Echoes of Doom）：末日超能力生存题材的放置游戏。重生在末日爆发前三天，带着 S 级空间异能，搜刮、据点建设、羁绊抉择、一次次重生。纯前端、零依赖、双击即玩。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+  <header class="topbar">
+    <div class="topbar-inner" id="topbar-inner"></div>
+  </header>
+
+  <div class="main-layout">
+    <aside class="sidebar">
+      <section class="panel" id="panel-resources"></section>
+      <section class="panel" id="panel-alert"></section>
+    </aside>
+
+    <main class="main-content">
+      <nav class="tabs" id="tabs"></nav>
+      <div class="tab-content" id="tab-content"></div>
+    </main>
+
+    <aside class="log-panel">
+      <section class="panel" id="panel-event" style="display:none"></section>
+      <section class="panel" id="panel-stats"></section>
+      <section class="panel" id="panel-log"></section>
+    </aside>
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+
+<div id="tooltip" class="tooltip" role="tooltip"></div>
+<div id="map-pop-root" class="map-pop-root"></div>
+<div id="modal-root" class="modal-root"></div>
+<div id="toast-root" class="toast-root"></div>
+
+<!-- ===== 配置：纯数据，无副作用 ===== -->
+<script src="js/config/resources.js"></script>
+<script src="js/config/phases.js"></script>
+<script src="js/config/dooms.js"></script>
+<script src="js/config/locations.js"></script>
+<script src="js/config/abilities.js"></script>
+<script src="js/config/facilities.js"></script>
+<script src="js/config/battles.js"></script>
+<script src="js/config/enemies.js"></script>
+<script src="js/config/caches.js"></script>
+<script src="js/config/money.js"></script>
+<script src="js/config/bonds.js"></script>
+<script src="js/config/events.js"></script>
+<script src="js/config/achievements.js"></script>
+<script src="js/config/rebirth.js"></script>
+<script src="js/config/story.js"></script>
+<script src="js/config/assets.js"></script>
+<script src="js/config/changelog.js"></script>
+
+<!-- ===== 引擎：纯逻辑，与界面解耦 ===== -->
+<script src="js/engine/utils.js"></script>
+<script src="js/engine/state.js"></script>
+<script src="js/engine/effects.js"></script>
+<script src="js/engine/production.js"></script>
+<script src="js/engine/ability.js"></script>
+<script src="js/engine/scavenge.js"></script>
+<script src="js/engine/eventengine.js"></script>
+<script src="js/engine/encounter.js"></script>
+<script src="js/engine/cache.js"></script>
+<script src="js/engine/cache.js"></script>
+<script src="js/engine/money.js"></script>
+<script src="js/engine/bondengine.js"></script>
+<script src="js/engine/build.js"></script>
+<script src="js/engine/defense.js"></script>
+<script src="js/engine/achievements.js"></script>
+<script src="js/engine/story.js"></script>
+<script src="js/engine/rebirth.js"></script>
+<script src="js/engine/actions.js"></script>
+<script src="js/engine/save.js"></script>
+<script src="js/engine/loop.js"></script>
+
+<!-- ===== 界面 ===== -->
+<script src="js/ui/dom.js"></script>
+<script src="js/ui/tips.js"></script>
+<script src="js/ui/assets.js"></script>
+<script src="js/ui/panels.js"></script>
+<script src="js/ui/modals.js"></script>
+<script src="js/ui/mapview.js"></script>
+<script src="js/ui/tab-map.js"></script>
+<script src="js/ui/tab-base.js"></script>
+<script src="js/ui/tab-defense.js"></script>
+<script src="js/ui/tab-bonds.js"></script>
+<script src="js/ui/tab-ability.js"></script>
+<script src="js/ui/tab-rebirth.js"></script>
+<script src="js/ui/tab-achievements.js"></script>
+<script src="js/ui/tab-settings.js"></script>
+<script src="js/ui/app.js"></script>
+<script src="js/ui/acts.js"></script>
+
+<script src="js/main.js"></script>
+</body>
+</html>

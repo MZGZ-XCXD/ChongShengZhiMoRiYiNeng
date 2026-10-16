@@ -1,0 +1,6 @@
+{
+    "name": "末日回声",
+    "description": "末日回声 · Echoes of Doom —— 末日超能力生存放置游戏，双击开始",
+    "entry": "dist/echoes-of-doom.html",
+    "icon": "assets/icon.ico"
+}
