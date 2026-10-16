@@ -19,8 +19,13 @@ param(
 $ErrorActionPreference = "Stop"
 $proj = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $src = (Resolve-Path -LiteralPath $Source).Path
+# Validate the kind first: a typo should say so, not silently create a folder nobody reads.
+if (@("portraits", "scenes", "dooms") -notcontains $Kind) {
+    throw "unknown -Kind '$Kind' (use portraits / scenes / dooms)"
+}
 $assetsDir = Join-Path $proj (Join-Path "assets" $Kind)
-if (-not (Test-Path -LiteralPath $assetsDir)) { throw "assets folder not found: $assetsDir" }
+# A fresh clone has no empty asset folders (git does not track them), so create on demand.
+if (-not (Test-Path -LiteralPath $assetsDir)) { New-Item -ItemType Directory -Force -Path $assetsDir | Out-Null }
 
 $tmpDir = Join-Path $proj "work"
 New-Item -ItemType Directory -Force -Path $tmpDir | Out-Null

@@ -3144,7 +3144,8 @@ window.CHANGELOG_DATA = {
                         "<b>单文件版漏内联图片<\/b>、<b>工具脚本不接受参数<\/b>、<b>带 <code>#!<\/code> 的脚本语法报错<\/b>等工具链问题。",
                         "<code>tools/install-art.ps1<\/code> 会把页面源码里的失败标记当成真失败，而且没认 <code>--dump-dom<\/code> 转义出来的 <code>&amp;gt;<\/code>， 导致图确实读到了却报「入库失败」。",
                         "文档里末日氛围图写的是 <code>assets/doom/<\/code>，脚本只认 <code>assets/dooms/<\/code> —— 现在两个目录名都认， 文档（<code>assets/README.md<\/code> 与主 <code>README.md<\/code>）也统一成 <code>assets/dooms/<\/code>。",
-                        "<b>单文件版会把同一张图内联三遍<\/b>：打包脚本原来是按路径做全量文本替换，只要更新日志或任何文案里 提到一次图片路径（比如「基准图是 <code>assets/portraits/…<\/code>」），那张图就会被整个再塞进去一遍。 现在只替换被引号包起来的路径（清单里的那种写法），并且同一张图确实被引用多次时会给出提醒。 修完单文件版从 933 KB 回到 576 KB。"
+                        "<b>单文件版会把同一张图内联三遍<\/b>：打包脚本原来是按路径做全量文本替换，只要更新日志或任何文案里 提到一次图片路径（比如「基准图是 <code>assets/portraits/…<\/code>」），那张图就会被整个再塞进去一遍。 现在只替换被引号包起来的路径（清单里的那种写法），并且同一张图确实被引用多次时会给出提醒。 修完单文件版从 933 KB 回到 576 KB。",
+                        "<b>空文件夹克隆下来会消失<\/b>：git 不跟踪空目录，<code>assets/scenes/<\/code> 与 <code>assets/dooms/<\/code> 里原本没图， 换台电脑克隆之后这两个文件夹就不存在，往里丢图会报「assets folder not found」。 现在各放一个 <code>.gitkeep<\/code> 占位，<code>install-art.ps1<\/code> 也会在目录不存在时自己建，并会明确拒绝拼错的 <code>-Kind<\/code>。"
                     ]
                 },
                 {

@@ -1,0 +1,2 @@
+占位文件：git 不跟踪空目录，没有它的话克隆下来就没有 assets/dooms/ 这个文件夹。
+末日氛围图放进这里，按 <末日id>.jpg 命名（见 assets/README.md）。
