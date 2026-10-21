@@ -3,6 +3,7 @@
 window.ASSET_MANIFEST = {
     "generated": "2026-10-21",
     "portraits": {
+        "anqi": "assets/portraits/anqi.jpg",
         "baimanman": "assets/portraits/baimanman.jpg",
         "shenxue": "assets/portraits/shenxue.jpg"
     },
