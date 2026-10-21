@@ -52,6 +52,12 @@
 
 ### 修复
 
+* **守门脚本不再依赖 PATH 里的 git**：用 `powershell -NoProfile` 启动时 PATH 会丢掉 Git，
+  脚本直接报「无法将 git 项识别为 cmdlet」。现在按 `GIT_EXE` → PATH → 常见安装目录 →
+  Codex 运行时自带的 git 依次查找，找不到才提示去装 Git for Windows。
+* **自检脚本并行跑会互相踩**：无头 Chrome 的 profile 目录和 `work\` 里的临时页面原来都是固定名字，
+  两个检查同时跑会抢同一个目录、读不到 dump，报出假失败（明明改的没问题）。现在都带上进程号，
+  并行跑也互不干扰。
 * **换行统一成 LF**：`js/config/locations.js` 原本是仓库里唯一一个 CRLF 换行的文件。
   新增 `.gitattributes`（`* text=auto eol=lf`）之后，Windows 默认的 `autocrlf=true`
   不会再把换行改来改去，换台电脑克隆也不会冒出「整个文件都变了」的假 diff。

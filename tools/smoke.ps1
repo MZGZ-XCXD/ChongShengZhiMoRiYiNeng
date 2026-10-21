@@ -8,11 +8,11 @@ if (-not (Test-Path -LiteralPath $page)) { throw "index.html not found" }
 
 $tmpDir = Join-Path $proj "work"
 New-Item -ItemType Directory -Force -Path $tmpDir | Out-Null
-$dump = Join-Path $tmpDir "dev-smoke-dom.html"
+$dump = Join-Path $tmpDir ("dev-smoke-dom-" + $PID + ".html")
 . (Join-Path $PSScriptRoot "lib-chrome.ps1")
 $chrome = Get-BrowserExe
 if (-not (Test-Path -LiteralPath $chrome)) { throw "chrome not found: $chrome" }
-$prof = Join-Path ([System.IO.Path]::GetTempPath()) "codex-doom-chrome-profile"
+$prof = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-doom-chrome-" + $PID)
 $url = "file:///" + $page.Replace('\', '/')
 $args = '--headless=new --disable-gpu --no-sandbox --window-size=1280,900 --virtual-time-budget=6000 ' +
     '--user-data-dir="' + $prof + '" --dump-dom "' + $url + '"'

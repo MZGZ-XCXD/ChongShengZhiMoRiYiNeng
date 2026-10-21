@@ -14,8 +14,8 @@ if (-not (Test-Path -LiteralPath $dist)) { throw "dist not found: run tools\run.
 
 $tmpDir = Join-Path $proj "work"
 New-Item -ItemType Directory -Force -Path $tmpDir | Out-Null
-$page = Join-Path $tmpDir "dev-driver-page.html"
-$dump = Join-Path $tmpDir "dev-driver-dump.html"
+$page = Join-Path $tmpDir ("dev-driver-page-" + $PID + ".html")
+$dump = Join-Path $tmpDir ("dev-driver-dump-" + $PID + ".html")
 
 $html = [System.IO.File]::ReadAllText($dist)
 
@@ -52,7 +52,7 @@ $html = $html.Remove($bodyIdx).Insert($bodyIdx, $tail)
 . (Join-Path $PSScriptRoot "lib-chrome.ps1")
 $chrome = Get-BrowserExe
 if (-not (Test-Path -LiteralPath $chrome)) { throw "chrome not found: $chrome" }
-$prof = Join-Path ([System.IO.Path]::GetTempPath()) "codex-doom-chrome-profile"
+$prof = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-doom-chrome-" + $PID)
 $url = "file:///" + $page.Replace('\', '/')
 $failed = $false
 foreach ($size in @("1280,900", "480,900")) {

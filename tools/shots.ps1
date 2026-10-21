@@ -19,7 +19,7 @@ $html = $html.Remove($idx).Insert($idx, $tail)
 
 . (Join-Path $PSScriptRoot "lib-chrome.ps1")
 $chrome = Get-BrowserExe
-$prof = Join-Path ([System.IO.Path]::GetTempPath()) "codex-doom-chrome-profile"
+$prof = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-doom-chrome-" + $PID)
 $url = "file:///" + $tmp.Replace('\', '/')
 
 $shots = @(

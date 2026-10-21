@@ -68,7 +68,7 @@ $body = $body.Replace('__KEEP__', ([string](1 - $CropBottom))).Replace('__WIDTH_
 
 . (Join-Path $PSScriptRoot "lib-chrome.ps1")
 $chrome = Get-BrowserExe
-$prof = Join-Path ([System.IO.Path]::GetTempPath()) "codex-doom-chrome-profile"
+$prof = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-doom-chrome-" + $PID)
 $url = "file:///" + $page.Replace('\', '/')
 $args = '--headless=new --disable-gpu --no-sandbox --allow-file-access-from-files ' +
     '--virtual-time-budget=20000 --user-data-dir="' + $prof + '" --dump-dom "' + $url + '"'

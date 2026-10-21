@@ -16,13 +16,49 @@ param(
 
 $ErrorActionPreference = "Stop"
 $proj = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
+
+# git may not be on PATH (for example when launched with -NoProfile, or on a machine
+# that only has the portable git that ships with an editor / runtime). Look in the
+# usual places instead of assuming.
+function Resolve-Git {
+    if ($env:GIT_EXE -and (Test-Path -LiteralPath $env:GIT_EXE -PathType Leaf)) {
+        return (Resolve-Path -LiteralPath $env:GIT_EXE).Path
+    }
+    $cmd = Get-Command git -ErrorAction SilentlyContinue
+    if ($cmd -and $cmd.Source) { return $cmd.Source }
+    $cands = @(
+        (Join-Path $env:ProgramFiles "Git\cmd\git.exe"),
+        (Join-Path ${env:ProgramFiles(x86)} "Git\cmd\git.exe"),
+        (Join-Path $env:ProgramFiles "Git\bin\git.exe"),
+        (Join-Path $env:LOCALAPPDATA "Programs\Git\cmd\git.exe"),
+        (Join-Path $env:USERPROFILE "scoop\shims\git.exe")
+    )
+    foreach ($c in $cands) {
+        if ($c -and (Test-Path -LiteralPath $c -PathType Leaf)) { return $c }
+    }
+    # Portable git bundled with Codex: usable, but pushing may still need a sign-in.
+    $cache = Join-Path $env:USERPROFILE ".cache\codex-runtimes"
+    if (Test-Path -LiteralPath $cache) {
+        $hit = Get-ChildItem -Path (Join-Path $cache "*\dependencies\native\git\cmd\git.exe") -File -ErrorAction SilentlyContinue |
+            Select-Object -First 1
+        if ($hit) { return $hit.FullName }
+    }
+    return $null
+}
+
+$git = Resolve-Git
+if (-not $git) {
+    throw "git not found. Install Git for Windows (https://git-scm.com/download/win), or set GIT_EXE to your git.exe."
+}
+Write-Host ("using git: " + $git)
+
 Push-Location -LiteralPath $proj
 try {
-    $branch = (& git rev-parse --abbrev-ref HEAD).Trim()
+    $branch = (& $git rev-parse --abbrev-ref HEAD).Trim()
     if ($LASTEXITCODE -ne 0) { throw "git rev-parse failed - is this a git repo?" }
     if ($branch -ne "main") { throw "you are on '$branch', not 'main'" }
 
-    $dirty = @(& git status --porcelain)
+    $dirty = @(& $git status --porcelain)
     if ($dirty.Count -gt 0) {
         Write-Host "working tree is NOT clean:"
         $dirty | ForEach-Object { Write-Host ("  " + $_) }
@@ -48,12 +84,12 @@ try {
     }
     Write-Host "check 2/3 ok: dist is not older than js / css / assets / index.html"
 
-    $aheadRaw = (& git rev-list --count "origin/main..HEAD" 2>$null)
+    $aheadRaw = (& $git rev-list --count "origin/main..HEAD" 2>$null)
     $ahead = -1
     if ($aheadRaw) {
         try { $ahead = [int]([string]$aheadRaw).Trim() } catch { $ahead = -1 }
     }
-    $head = (& git rev-parse --short HEAD).Trim()
+    $head = (& $git rev-parse --short HEAD).Trim()
     if ($ahead -ge 0) {
         Write-Host ("check 3/3 ok: " + $ahead + " commit(s) ahead of origin/main, HEAD " + $head)
     } else {
@@ -71,7 +107,7 @@ try {
     }
 
     Write-Host "pushing to origin main ..."
-    & git push origin main
+    & $git push origin main
     if ($LASTEXITCODE -ne 0) { throw "git push failed (exit code $LASTEXITCODE)" }
     Write-Host "done: pushed to origin/main"
 }
