@@ -26,6 +26,7 @@ window.ASSET_MANIFEST = {
         "conv": "assets/scenes/conv.jpg",
         "garage": "assets/scenes/garage.jpg",
         "home": "assets/scenes/home.jpg",
+        "market": "assets/scenes/market.jpg",
         "street": "assets/scenes/street.jpg",
         "yard": "assets/scenes/yard.jpg"
     },
