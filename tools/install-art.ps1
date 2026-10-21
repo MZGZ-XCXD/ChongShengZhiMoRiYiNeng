@@ -68,7 +68,7 @@ $body = $body.Replace('__KEEP__', ([string](1 - $CropBottom))).Replace('__WIDTH_
 
 . (Join-Path $PSScriptRoot "lib-chrome.ps1")
 $chrome = Get-BrowserExe
-$prof = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-doom-chrome-" + $PID)
+$prof = Join-Path ([System.IO.Path]::GetTempPath()) "codex-doom-chrome-art"
 $url = "file:///" + $page.Replace('\', '/')
 $args = '--headless=new --disable-gpu --no-sandbox --allow-file-access-from-files ' +
     '--virtual-time-budget=20000 --user-data-dir="' + $prof + '" --dump-dom "' + $url + '"'
@@ -77,7 +77,7 @@ cmd /c ("`"" + $chrome + "`" " + $args + " > `"" + $dump + "`" 2>nul")
 
 if (-not (Test-Path -LiteralPath $dump)) { throw "chrome produced no output" }
 $out = $null
-for ($try = 0; $try -lt 12; $try++) {
+for ($try = 0; $try -lt 40; $try++) {
     try { $out = [System.IO.File]::ReadAllText($dump); break }
     catch { Start-Sleep -Milliseconds 400 }
 }

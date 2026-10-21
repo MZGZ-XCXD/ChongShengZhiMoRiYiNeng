@@ -52,7 +52,7 @@ $html = $html.Remove($bodyIdx).Insert($bodyIdx, $tail)
 . (Join-Path $PSScriptRoot "lib-chrome.ps1")
 $chrome = Get-BrowserExe
 if (-not (Test-Path -LiteralPath $chrome)) { throw "chrome not found: $chrome" }
-$prof = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-doom-chrome-" + $PID)
+$prof = Join-Path ([System.IO.Path]::GetTempPath()) "codex-doom-chrome-check"
 $url = "file:///" + $page.Replace('\', '/')
 $failed = $false
 foreach ($size in @("1280,900", "480,900")) {
@@ -63,7 +63,7 @@ foreach ($size in @("1280,900", "480,900")) {
 
     if (-not (Test-Path -LiteralPath $dump)) { throw "chrome produced no output for $size" }
     $out = $null
-    for ($try = 0; $try -lt 12; $try++) {
+for ($try = 0; $try -lt 40; $try++) {
         try { $out = [System.IO.File]::ReadAllText($dump); break }
         catch { Start-Sleep -Milliseconds 400 }
     }

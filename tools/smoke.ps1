@@ -12,7 +12,7 @@ $dump = Join-Path $tmpDir ("dev-smoke-dom-" + $PID + ".html")
 . (Join-Path $PSScriptRoot "lib-chrome.ps1")
 $chrome = Get-BrowserExe
 if (-not (Test-Path -LiteralPath $chrome)) { throw "chrome not found: $chrome" }
-$prof = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-doom-chrome-" + $PID)
+$prof = Join-Path ([System.IO.Path]::GetTempPath()) "codex-doom-chrome-smoke"
 $url = "file:///" + $page.Replace('\', '/')
 $args = '--headless=new --disable-gpu --no-sandbox --window-size=1280,900 --virtual-time-budget=6000 ' +
     '--user-data-dir="' + $prof + '" --dump-dom "' + $url + '"'
@@ -21,7 +21,7 @@ cmd /c ("`"" + $chrome + "`" " + $args + " > `"" + $dump + "`" 2>nul")
 
 if (-not (Test-Path -LiteralPath $dump)) { throw "chrome produced no output" }
 $out = $null
-for ($try = 0; $try -lt 12; $try++) {
+for ($try = 0; $try -lt 40; $try++) {
     try { $out = [System.IO.File]::ReadAllText($dump); break }
     catch { Start-Sleep -Milliseconds 400 }
 }
