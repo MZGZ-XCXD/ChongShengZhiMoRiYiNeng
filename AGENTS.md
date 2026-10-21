@@ -86,6 +86,9 @@ tools\smoke.ps1                            # 多文件版冒烟
 tools\shots.ps1                            # 截界面图到 screenshots/
 ```
 
+> `check.ps1` / `check-reset.ps1` / `smoke.ps1` / `shots.ps1` 都要拉无头 Chrome，**串行跑**。
+> 同时开两个会互相拖慢，偶尔会让读 dump 超时、报出「file locked」这种假失败。
+
 `work\` 是草稿目录（临时页面、自检报告），删掉不影响游戏。
 
 ## 7. 图片资源

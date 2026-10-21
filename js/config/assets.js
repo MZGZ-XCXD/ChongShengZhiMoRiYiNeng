@@ -5,8 +5,12 @@ window.ASSET_MANIFEST = {
     "portraits": {
         "anqi": "assets/portraits/anqi.jpg",
         "baimanman": "assets/portraits/baimanman.jpg",
+        "laozhao": "assets/portraits/laozhao.jpg",
         "linqing": "assets/portraits/linqing.jpg",
-        "shenxue": "assets/portraits/shenxue.jpg"
+        "shenxue": "assets/portraits/shenxue.jpg",
+        "taotao": "assets/portraits/taotao.jpg",
+        "wangyi": "assets/portraits/wangyi.jpg",
+        "zhouheng": "assets/portraits/zhouheng.jpg"
     },
     "scenes": {},
     "dooms": {}
