@@ -5,6 +5,7 @@ window.ASSET_MANIFEST = {
     "portraits": {
         "anqi": "assets/portraits/anqi.jpg",
         "baimanman": "assets/portraits/baimanman.jpg",
+        "linqing": "assets/portraits/linqing.jpg",
         "shenxue": "assets/portraits/shenxue.jpg"
     },
     "scenes": {},
