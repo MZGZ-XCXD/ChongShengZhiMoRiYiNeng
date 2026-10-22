@@ -114,6 +114,9 @@
         check('开局弹出了序章', !!s.pending && s.pending.type === 'story' && s.pending.id === 'prologue',
             JSON.stringify(s.pending));
         renderOk('序章浮窗');
+        const prologueArt = document.querySelector('#modal-root .story-art');
+        check('序章显示当前末日的氛围图', !!prologueArt && !!prologueArt.getAttribute('src'),
+            prologueArt ? '有末日背景图' : '没有末日背景图');
         const prologueChoice = s.pending ? STORY_CONFIG[s.pending.id].choices.length : 0;
         check('序章有选项', prologueChoice > 0, prologueChoice + ' 个');
         StoryEngine.resolve(s, 0);
@@ -897,8 +900,10 @@
             App.render(true);
             /* 有图时元素本身就是 <img>，没图时是一个装着 SVG 的 div（带 is-ph） */
             const hasArt = el => !!el && (el.tagName === 'IMG' || !!el.querySelector('img, svg') || el.classList.contains('is-ph'));
-            check('图片清单能被读到', typeof counts.portraits === 'number' && typeof counts.scenes === 'number',
-                JSON.stringify(counts));
+            check('图片清单能被读到', typeof counts.portraits === 'number' && typeof counts.scenes === 'number' &&
+                typeof counts.dooms === 'number', JSON.stringify(counts));
+            check('四种末日氛围图齐全', counts.dooms === Object.keys(DOOMS_CONFIG).length,
+                counts.dooms + ' / ' + Object.keys(DOOMS_CONFIG).length);
             const drawerPic = document.querySelector('#map-pop-root .drawer-scene .scene-pic');
             check('地点弹窗里有背景位（有图显示图，没图显示占位）',
                 hasArt(drawerPic), drawerPic ? (drawerPic.tagName === 'IMG' ? '有背景图' : '占位') : '没有');

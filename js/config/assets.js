@@ -38,5 +38,10 @@ window.ASSET_MANIFEST = {
         "warehouse": "assets/scenes/warehouse.jpg",
         "yard": "assets/scenes/yard.jpg"
     },
-    "dooms": {}
+    "dooms": {
+        "flood": "assets/dooms/flood.jpg",
+        "frost": "assets/dooms/frost.jpg",
+        "nuclear": "assets/dooms/nuclear.jpg",
+        "zombie": "assets/dooms/zombie.jpg"
+    }
 };
