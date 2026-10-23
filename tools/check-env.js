@@ -31,7 +31,7 @@ function note(msg) {
     lines.push('  ·     ' + msg);
 }
 
-lines.push('======== 末日回声 · 环境自检 ========');
+lines.push('======== 末日轮回 · 环境自检 ========');
 lines.push('工程目录：' + ROOT);
 lines.push('');
 

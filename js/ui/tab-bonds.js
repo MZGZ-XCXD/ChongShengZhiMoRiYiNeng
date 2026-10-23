@@ -6,6 +6,12 @@
         const st = BondEngine.get(s, cfg.id);
         const info = BondEngine.giftInfo(s, cfg.id);
         const loan = MoneyEngine.borrowInfo(s, cfg.id);
+        const loanUi = PhaseManager.isAtLeast(s, 'outbreak')
+            ? ''
+            : (loan.ok
+                ? '<button class="btn small" data-act="borrow|' + cfg.id + '">借钱 ' + Utils.fmtInt(loan.cash) +
+                  '（好感 -' + loan.favorCost + '）</button>'
+                : '<span class="need-chip">借钱：' + G.esc(loan.reason) + '</span>');
         const outcome = { ally: '同伴', partner: '伴侣', enemy: '敌人', dead: '已不在', left: '已离开' }[st.outcome] || '观望';
         const cls = st.outcome === 'enemy' ? 'bad' : (st.outcome === 'dead' ? 'gone' : (st.value >= 60 ? 'ok' : 'wait'));
         const assist = BondEngine.assistActive(s, cfg.id);
@@ -22,10 +28,7 @@
                     (assist ? '协助中' : (cfg.assist ? '好感 ' + cfg.assist.at + ' 起协助' : '无协助')) + '</span>' +
                 (info.ok ? '<button class="btn small" data-act="gift|' + cfg.id + '">送 ' + cfg.gift.res + ' ×' + cfg.gift.amount + '</button>'
                     : '<span class="need-chip">' + G.esc(info.reason || '') + '</span>') +
-                (loan.ok
-                    ? '<button class="btn small" data-act="borrow|' + cfg.id + '">借钱 ' + Utils.fmtInt(loan.cash) +
-                      '（好感 -' + loan.favorCost + '）</button>'
-                    : '<span class="need-chip">借钱：' + G.esc(loan.reason) + '</span>') +
+                loanUi +
             '</div>' +
             '</div>';
     }

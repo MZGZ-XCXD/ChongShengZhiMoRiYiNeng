@@ -272,7 +272,7 @@
 
     /* ---------------- 欢迎 / 离线 / 存档 ---------------- */
     function welcomeModal() {
-        const wrap = G.openModal('<h2>💠 末日回声</h2>' +
+        const wrap = G.openModal('<h2>💠 末日轮回</h2>' +
             '<div class="story-pages">' +
             '<p>上一世，你在末日里活了三个月，最后被自己最信的两个人关在仓库里。</p>' +
             '<p>再睁开眼，是三天前的早上七点二十。城市还在正常运转，快递还在派送，' +

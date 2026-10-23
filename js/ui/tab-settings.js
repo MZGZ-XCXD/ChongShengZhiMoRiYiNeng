@@ -121,7 +121,7 @@
         return '<div class="panel-box set-group">' +
             '<div class="panel-head"><span class="panel-title">关于</span></div>' +
             '<div class="set-row"><div class="set-info">' +
-                '<div class="set-label">末日回声 · Echoes of Doom</div>' +
+                '<div class="set-label">末日轮回：从S级空间异能开始</div>' +
                 '<div class="set-note">纯前端单机放置游戏，存档在浏览器本地（localStorage），' +
                 '不联网、不安装，双击 HTML 就能玩。</div></div>' +
                 '<div class="set-ctl"><button class="btn small" data-act="help">开头引导</button></div>' +

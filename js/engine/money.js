@@ -12,6 +12,9 @@
         const st = BondEngine.get(state, id);
         const R = BORROW_RULES;
         if (!c || !st) return { ok: false, reason: '没有这个人。' };
+        if (PhaseManager.isAtLeast(state, 'outbreak')) {
+            return { ok: false, hidden: true, reason: '末日爆发后，已经没人愿意借钱了。' };
+        }
         if (!st.met) return { ok: false, reason: '还不认识他/她。' };
         if (st.outcome === 'enemy' || st.outcome === 'dead' || st.outcome === 'left') {
             return { ok: false, reason: '现在开不了这个口。' };

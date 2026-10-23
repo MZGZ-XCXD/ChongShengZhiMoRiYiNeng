@@ -10,8 +10,8 @@
         const html =
             '<div class="brand">' +
                 '<span class="brand-mark">💠</span>' +
-                '<h1>末日回声</h1>' +
-                '<span class="brand-sub">Echoes of Doom</span>' +
+                '<h1>末日轮回</h1>' +
+                '<span class="brand-sub">从S级空间异能开始</span>' +
             '</div>' +
             '<div class="topbar-stats">' +
                 '<div class="top-stat" data-tip="phase"><span class="top-label">阶段</span>' +

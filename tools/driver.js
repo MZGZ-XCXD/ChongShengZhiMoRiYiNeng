@@ -101,7 +101,7 @@
             if (window.Modals) Modals.refresh();
             return st;
         };
-        R.log.push('======== 末日回声 · 单文件版端到端自检 ========');
+        R.log.push('======== 末日轮回 · 单文件版端到端自检 ========');
         try {
 
         /* ---------- A. 启动 ---------- */
@@ -1146,6 +1146,11 @@
                 MoneyEngine.borrowInfo(s, 'anqi').favorCost + ' 好感 / ' + MoneyEngine.borrowInfo(s, 'anqi').cash + ' 现金');
             BondEngine.get(s, 'anqi').value = 10;
             check('好感不够时借不到', MoneyEngine.borrowInfo(s, 'anqi').ok === false,
+                MoneyEngine.borrowInfo(s, 'anqi').reason);
+            BondEngine.get(s, 'anqi').value = 60;
+            s.hours = PHASES_CONFIG[1].start;
+            check('末日爆发后不能再借钱', MoneyEngine.borrowInfo(s, 'anqi').ok === false &&
+                MoneyEngine.borrowInfo(s, 'anqi').hidden === true,
                 MoneyEngine.borrowInfo(s, 'anqi').reason);
 
             initState();

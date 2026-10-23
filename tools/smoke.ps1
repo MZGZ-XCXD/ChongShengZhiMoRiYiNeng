@@ -29,7 +29,7 @@ if ($null -eq $out) { throw "cannot read chrome dump (file locked)" }
 
 $nodes = ([regex]::Matches($out, 'class="mnode')).Count
 $tabs = ([regex]::Matches($out, 'class="tab')).Count
-$hasTitle = $out.Contains('末日回声')
+$hasTitle = $out.Contains('末日轮回')
 $hasMap = $out.Contains('svg class="citymap')
 Write-Host ("multi-file smoke: title=" + $hasTitle + " mapNodes=" + $nodes + " map=" + $hasMap + " tabs=" + $tabs)
 Remove-Item -LiteralPath $dump -Force

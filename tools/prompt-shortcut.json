@@ -1,5 +1,5 @@
 {
-    "name": "末日回声-出图提示词",
+    "name": "末日轮回-出图提示词",
     "description": "36 条立绘 / 地点 / 末日出图提示词，直接复制去 GPT、豆包、Gemini 用",
     "entry": "tools/art-prompts.md"
 }

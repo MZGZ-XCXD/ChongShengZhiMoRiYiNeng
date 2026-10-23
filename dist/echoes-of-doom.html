@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>末日回声 · Echoes of Doom</title>
-<meta name="description" content="末日回声（Echoes of Doom）：末日超能力生存题材的放置游戏。重生在末日爆发前三天，带着 S 级空间异能，搜刮、据点建设、羁绊抉择、一次次重生。纯前端、零依赖、双击即玩。">
+<title>末日轮回：从S级空间异能开始</title>
+<meta name="description" content="末日轮回：从S级空间异能开始——末日超能力生存放置游戏。重生在末日爆发前三天，带着 S 级空间异能，搜刮、据点建设、羁绊抉择、一次次重生。">
 <style>
 /* =========================================================
-   末日回声（Echoes of Doom）· 样式表
+   末日轮回：从S级空间异能开始 · 样式表
    基调：沥青黑 + 锈铁 + 警示黄，湿冷的水泥灰，只有异能是冷青色。
    装饰层（噪点、扫描线、暗角）都是纯 CSS，不参与布局，也不参与重绘节流。
    ========================================================= */
@@ -5232,6 +5232,9 @@ window.CHANGELOG_DATA = {
         const st = BondEngine.get(state, id);
         const R = BORROW_RULES;
         if (!c || !st) return { ok: false, reason: '没有这个人。' };
+        if (PhaseManager.isAtLeast(state, 'outbreak')) {
+            return { ok: false, hidden: true, reason: '末日爆发后，已经没人愿意借钱了。' };
+        }
         if (!st.met) return { ok: false, reason: '还不认识他/她。' };
         if (st.outcome === 'enemy' || st.outcome === 'dead' || st.outcome === 'left') {
             return { ok: false, reason: '现在开不了这个口。' };
@@ -7219,8 +7222,8 @@ window.CHANGELOG_DATA = {
         const html =
             '<div class="brand">' +
                 '<span class="brand-mark">💠</span>' +
-                '<h1>末日回声</h1>' +
-                '<span class="brand-sub">Echoes of Doom</span>' +
+                '<h1>末日轮回</h1>' +
+                '<span class="brand-sub">从S级空间异能开始</span>' +
             '</div>' +
             '<div class="topbar-stats">' +
                 '<div class="top-stat" data-tip="phase"><span class="top-label">阶段</span>' +
@@ -7644,7 +7647,7 @@ window.CHANGELOG_DATA = {
 
     /* ---------------- 欢迎 / 离线 / 存档 ---------------- */
     function welcomeModal() {
-        const wrap = G.openModal('<h2>💠 末日回声</h2>' +
+        const wrap = G.openModal('<h2>💠 末日轮回</h2>' +
             '<div class="story-pages">' +
             '<p>上一世，你在末日里活了三个月，最后被自己最信的两个人关在仓库里。</p>' +
             '<p>再睁开眼，是三天前的早上七点二十。城市还在正常运转，快递还在派送，' +
@@ -8196,6 +8199,12 @@ window.CHANGELOG_DATA = {
         const st = BondEngine.get(s, cfg.id);
         const info = BondEngine.giftInfo(s, cfg.id);
         const loan = MoneyEngine.borrowInfo(s, cfg.id);
+        const loanUi = PhaseManager.isAtLeast(s, 'outbreak')
+            ? ''
+            : (loan.ok
+                ? '<button class="btn small" data-act="borrow|' + cfg.id + '">借钱 ' + Utils.fmtInt(loan.cash) +
+                  '（好感 -' + loan.favorCost + '）</button>'
+                : '<span class="need-chip">借钱：' + G.esc(loan.reason) + '</span>');
         const outcome = { ally: '同伴', partner: '伴侣', enemy: '敌人', dead: '已不在', left: '已离开' }[st.outcome] || '观望';
         const cls = st.outcome === 'enemy' ? 'bad' : (st.outcome === 'dead' ? 'gone' : (st.value >= 60 ? 'ok' : 'wait'));
         const assist = BondEngine.assistActive(s, cfg.id);
@@ -8212,10 +8221,7 @@ window.CHANGELOG_DATA = {
                     (assist ? '协助中' : (cfg.assist ? '好感 ' + cfg.assist.at + ' 起协助' : '无协助')) + '</span>' +
                 (info.ok ? '<button class="btn small" data-act="gift|' + cfg.id + '">送 ' + cfg.gift.res + ' ×' + cfg.gift.amount + '</button>'
                     : '<span class="need-chip">' + G.esc(info.reason || '') + '</span>') +
-                (loan.ok
-                    ? '<button class="btn small" data-act="borrow|' + cfg.id + '">借钱 ' + Utils.fmtInt(loan.cash) +
-                      '（好感 -' + loan.favorCost + '）</button>'
-                    : '<span class="need-chip">借钱：' + G.esc(loan.reason) + '</span>') +
+                loanUi +
             '</div>' +
             '</div>';
     }
@@ -8567,7 +8573,7 @@ window.CHANGELOG_DATA = {
         return '<div class="panel-box set-group">' +
             '<div class="panel-head"><span class="panel-title">关于</span></div>' +
             '<div class="set-row"><div class="set-info">' +
-                '<div class="set-label">末日回声 · Echoes of Doom</div>' +
+                '<div class="set-label">末日轮回：从S级空间异能开始</div>' +
                 '<div class="set-note">纯前端单机放置游戏，存档在浏览器本地（localStorage），' +
                 '不联网、不安装，双击 HTML 就能玩。</div></div>' +
                 '<div class="set-ctl"><button class="btn small" data-act="help">开头引导</button></div>' +

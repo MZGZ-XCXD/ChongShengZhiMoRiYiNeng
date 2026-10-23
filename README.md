@@ -1,4 +1,4 @@
-# 末日回声 · Echoes of Doom
+# 末日轮回：从S级空间异能开始
 
 一个**末日超能力生存**题材的单机放置游戏（Idle / Incremental）：
 上一世被兄弟和女人关在仓库里，再睁眼是末日爆发前三天。你带着 S 级空间异能重生回来，
@@ -35,7 +35,7 @@
 
 ```
 tools\run.ps1 tools\gen-icon.js             # 生成 assets/icon.ico（桌面图标，纯代码画的）
-.\tools\make-desktop-shortcut.ps1           # 在桌面创建 / 刷新「末日回声」快捷方式
+.\tools\make-desktop-shortcut.ps1           # 在桌面创建 / 刷新「末日轮回」快捷方式
 ```
 
 快捷方式指向单文件版 `dist/echoes-of-doom.html`，双击就用默认浏览器打开，不依赖这个文件夹是否被移动

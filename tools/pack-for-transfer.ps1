@@ -10,7 +10,7 @@
 #
 # Usage (from the project directory):
 #   .\tools\pack-for-transfer.ps1
-#   .\tools\pack-for-transfer.ps1 -Out "D:\末日回声.zip"
+#   .\tools\pack-for-transfer.ps1 -Out "D:\末日轮回.zip"
 #
 # ASCII only (PowerShell 5.1 reads a BOM-less UTF-8 .ps1 as GBK).
 param(
