@@ -14,7 +14,7 @@
 ## id 对照
 
 **羁绊（portraits）**：wangyi 王姨、laozhao 老赵、zhouheng 周恒、shenxue 沈雪、yanprof 严教授、
-taotao 陶陶、chenmo 陈默、linqing 林晴、lutie 陆铁、anqi 安琪、oldk 老K、xiaoma 小马、
+taotao 陶陶、chenmo 陈默、linqing 林晴、lutie 陆铁、anqi 苏晚棠、oldk 老K、xiaoma 小马、
 baimanman 白小满、fangdoctor 方医生、guchangan 顾长安、huangsan 黄三、zhengdui 郑队
 
 **地点（scenes）**：home 自家公寓、building 公寓楼、yard 小区院内、conv 楼下便利店、garage 地下车库、

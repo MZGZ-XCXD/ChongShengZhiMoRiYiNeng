@@ -235,7 +235,7 @@ const BONDS_CONFIG = [
         },
     },
     {
-        id: 'anqi', name: '安琪', icon: '👱‍♀️', gender: '女', kind: 'ally',
+        id: 'anqi', name: '苏晚棠', icon: '👱‍♀️', gender: '女', kind: 'ally',
         role: '富商的女儿，现金多到没处花', ability: null, phase: 'outbreak',
         locate: { event: 'heiress' },
         desc: '她家里有发电机、有存粮、有整面墙的酒。她说她爸上周坐直升机走了，没带她。',
@@ -250,7 +250,7 @@ const BONDS_CONFIG = [
             ],
         },
         crossroad: {
-            at: 50, title: '安琪的爸爸',
+            at: 50, title: '苏晚棠的爸爸',
             text: '"电台里有人用我爸的呼号发消息。"她拿着收音机的手在抖，"我想去那个频点回话。"',
             choices: [
                 { text: '陪她发这通消息', tip: '消耗 燃料 10。结果可能是希望，也可能是打击。', cost: { '燃料': 10 }, value: 20, crystal: 3, result: '回话的是她爸的司机。她听完之后哭了一夜，第二天开始学着开卡车、修电路。' },

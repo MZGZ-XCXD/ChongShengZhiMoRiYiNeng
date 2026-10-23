@@ -664,6 +664,12 @@
 
             /* 窄屏：点卡片任意位置，浮窗都要完整留在屏幕里 */
             if (window.innerWidth < 900) {
+                const resGrid = document.querySelector('#panel-resources .res-grid');
+                const cols = resGrid ? getComputedStyle(resGrid).gridTemplateColumns.split(/\s+/).filter(Boolean).length : 0;
+                const resTops = resGrid ? new Set([].slice.call(resGrid.querySelectorAll('.res-row'))
+                    .map(el => Math.round(el.getBoundingClientRect().top))) : new Set();
+                check('窄屏资源列表分成两列显示', cols === 2 && resGrid.scrollWidth <= resGrid.clientWidth + 1,
+                    cols + ' 列 / ' + resTops.size + ' 行');
                 const tip = document.getElementById('tooltip');
                 const cards = [].slice.call(document.querySelectorAll('#tab-content .card[data-tip], #tab-content .mnode[data-tip]'));
                 let bad = 0;
@@ -1131,6 +1137,9 @@
             check('借到钱：现金增加、好感减少',
                 br.ok && ResourcesManager.amount('现金') > cashBefore &&
                 BondEngine.get(s, 'anqi').value < favorBefore, br.msg);
+            check('千金小姐的显示名已改为苏晚棠',
+                BONDS_CONFIG.find(b => b.id === 'anqi').name === '苏晚棠' && br.msg.indexOf('苏晚棠') >= 0,
+                br.msg);
             check('同一个人越借越贵、能借到的越少',
                 MoneyEngine.borrowInfo(s, 'anqi').favorCost > binfo.favorCost &&
                 MoneyEngine.borrowInfo(s, 'anqi').cash < binfo.cash,

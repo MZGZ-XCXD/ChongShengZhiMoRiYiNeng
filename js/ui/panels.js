@@ -44,7 +44,7 @@
 
     function renderResources() {
         const s = GameState;
-        let rows = '';
+        const rows = [];
         for (const k of RESOURCES_ORDER) {
             const r = s.resources[k];
             if (!r) continue;
@@ -52,20 +52,23 @@
             const rate = ProductionEngine.rateOf(s, k);
             const net = (rate.prod || 0) - (rate.use || 0);
             const cfg = RESOURCES_CONFIG[k];
-            rows += '<div class="res-row" data-tip="res|' + G.esc(k) + '">' +
+            rows.push('<div class="res-row" data-tip="res|' + G.esc(k) + '">' +
                 '<span class="nm">' + cfg.icon + ' ' + k + '</span>' +
                 '<span class="amt">' + Utils.fmtInt(r.amount) + '</span>' +
                 '<span class="rate ' + G.rateClass(net) + '">' +
                     (Math.abs(net) < 1e-9 ? '—' : Utils.fmtRate(net, 1) + '/时') + '</span>' +
-                '</div>';
+                '</div>');
         }
+        const resourceList = '<div class="res-grid">' +
+            (rows.length ? rows.join('') : '<div class="empty">空间里空空的。</div>') +
+            '</div>';
         const used = ResourcesManager.spaceUsed(s);
         const cap = ResourcesManager.spaceCap(s);
         const full = cap ? used / cap : 0;
         const html =
             '<div class="panel-head"><span class="panel-title">物资</span>' +
             '<span class="panel-extra" data-tip="crystal">💎 ' + Utils.fmtInt(s.space.crystals) + '</span></div>' +
-            (rows || '<div class="empty">空间里空空的。</div>') +
+            resourceList +
             '<div class="space-box" data-tip="space">' +
                 '<div class="space-line"><span>异能空间</span><span>' +
                     Utils.fmtInt(used) + ' / ' + Utils.fmtInt(cap) + ' 格</span></div>' +

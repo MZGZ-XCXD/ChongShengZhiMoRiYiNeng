@@ -349,6 +349,7 @@ h1, h2, h3 { font-family: "Palatino Linotype", "Songti SC", Georgia, serif; }
 .hint { font-size: .72rem; color: var(--text-dim); margin-top: 8px; line-height: 1.6; }
 
 /* ---------------- 侧栏细节 ---------------- */
+.res-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
 .res-row {
     display: grid; grid-template-columns: 1fr auto auto; gap: 8px;
     align-items: baseline; padding: 3px 0; font-size: .8rem;
@@ -716,6 +717,13 @@ h1, h2, h3 { font-family: "Palatino Linotype", "Songti SC", Georgia, serif; }
     .sidebar, .main-content { overflow: visible; }
     .tab-content { overflow: visible; }
     .grid { grid-template-columns: minmax(0, 1fr); }
+    .res-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; }
+    .res-grid .res-row {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 4px; padding: 4px 0; font-size: .74rem;
+    }
+    .res-grid .res-row .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .res-grid .res-row .rate { min-width: 44px; font-size: .64rem; }
     .tab { padding: 7px 10px; font-size: .78rem; }
     .modal { padding: 14px; }
     .tooltip { max-width: 88vw; }
